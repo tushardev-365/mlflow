@@ -2413,6 +2413,9 @@ class SqlJob(Base):
     Stores additional job status details.
     """
 
+    creator = Column(String(255), nullable=True)
+    """Username who created the job (``None`` if unauthenticated); for per-job ownership."""
+
     __table_args__ = (
         PrimaryKeyConstraint("id", name="jobs_pk"),
         Index(
@@ -2449,6 +2452,7 @@ class SqlJob(Base):
             last_update_time=self.last_update_time,
             workspace=self.workspace,
             status_details=self.status_details,
+            creator=self.creator,
         )
 
 
